@@ -1,11 +1,8 @@
 import  { useState, useEffect } from 'react';
-import Header from './Header';
-import Footer from './Footer';
 import courseImg from '../assets/course.jpeg';
 import projectImg from '../assets/project.jpg';
 import communityImg from '../assets/community.png';
 import '../App.css';
-
 
 export default function Home() {
   const [seconds, setSeconds] = useState(0);
@@ -18,7 +15,6 @@ export default function Home() {
 
   return (
     <>
-      <Header />
       <section className="section hero">
         <h1>Welcome to Tech Hub</h1>
         <p>Your Gateway to Technology Learning</p>
@@ -45,10 +41,7 @@ export default function Home() {
             <p>Connect with tech enthusiasts</p>
           </div>
         </div>
-        
       </main>
-      
-      <Footer />
     </>
   );
 } 

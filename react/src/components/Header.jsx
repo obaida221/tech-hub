@@ -15,6 +15,8 @@ export default function Header() {
         <Link to="/services">Services</Link>
         <Link to="/contact">Contact</Link>
         <Link to="/learn">What I learned</Link>
+        <Link to="/posts">Posts</Link>
+        <Link to="/experiments">Experiments</Link>
       </nav>
     </header>
   );

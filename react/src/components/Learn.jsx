@@ -1,11 +1,8 @@
-import Header from './Header';
-import Footer from './Footer';
 import '../App.css';
 
 export default function Learn() {
   return (
     <>
-      <Header />
       <section className="section">
         <h2>What I Have Learned</h2>
         <p>Practice makes perfect</p>
@@ -21,7 +18,6 @@ export default function Learn() {
           <li>import: Brings in exported components/functions to use in another file.</li>
         </ul>
       </section>
-      <Footer />
     </>
   );
 }
