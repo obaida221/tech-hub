@@ -35,9 +35,8 @@ function App() {
           <Route path="services" element={<Services />} />
           <Route path="contact" element={<Contact />} />
           <Route path="learn" element={<Learn />} />
-        
           <Route path="posts" element={<Posts />}>
-            <Route path=":id" element={<Posts />} /> {/* Nested child route */}
+            <Route path=":id" element={<Posts />} />
           </Route>
 
           <Route path="experiments" element={<Experiments />} />
