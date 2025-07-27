@@ -1,55 +1,67 @@
-import { useEffect, useState } from 'react';
-import axios from 'axios';
-import './Posts.css';
+import { useState } from 'react';
+import { styled } from '@mui/material/styles';
+import Box from '@mui/material/Box';
+import Paper from '@mui/material/Paper';
+import Grid from '@mui/material/Grid';
+import TextField from '@mui/material/TextField';
+import Button from '@mui/material/Button';
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
 
-const POSTS_PER_PAGE = 10;
+const Item = styled(Paper)(({ theme }) => ({
+  backgroundColor: '#fff',
+  ...theme.typography.body2,
+  padding: theme.spacing(1),
+  textAlign: 'center',
+  color: (theme.vars ?? theme).palette.text.secondary,
+  ...theme.applyStyles?.('dark', {
+    backgroundColor: '#1A2027',
+  }),
+}));
 
-function Post({ post }) {
+export default function TodoGrid() {
+  const [todos, setTodos] = useState([]);
+  const [input, setInput] = useState('');
+
+  const addTodo = () => {
+    if (input.trim()) {
+      setTodos([...todos, input]);
+      setInput('');
+    }
+  };
+
   return (
-    <div className="card">
-      <h3>{post.title}</h3>
-      <p>{post.body}</p>
-    </div>
+    <Box sx={{ flexGrow: 1, mt: 4 }}>
+      <Grid container spacing={2}>
+        <Grid item xs={8}>
+          <Item>
+            <TextField
+              label="Add a task"
+              value={input}
+              onChange={e => setInput(e.target.value)}
+              size="small"
+              sx={{ mr: 2 }}
+            />
+            <Button variant="contained" onClick={addTodo}>
+              Add
+            </Button>
+          </Item>
+        </Grid>
+        <Grid item xs={4}>
+          <Item>
+            <strong>Tasks: {todos.length}</strong>
+          </Item>
+        </Grid>
+        <Grid item xs={12}>
+          <Item>
+            <List>
+              {todos.map((todo, idx) => (
+                <ListItem key={idx}>{todo}</ListItem>
+              ))}
+            </List>
+          </Item>
+        </Grid>
+      </Grid>
+    </Box>
   );
 }
-
-export default function Posts() {
-  const [posts, setPosts] = useState([]);
-  const [error, setError] = useState(null);
-  const [page, setPage] = useState(1);
-  const [total, setTotal] = useState(0);
-
-  useEffect(() => {
-    setError(null);
-    const fetchPosts = async () => {
-      try {
-      const res = await fetch(`https://jsonplaceholder.typicode.com/posts?_page=${page}&_limit=${POSTS_PER_PAGE}`);
-      setTotal(Number(res.headers.get('x-total-count')) || 100);
-      const data = await res.json();
-      setPosts(data);
-      } catch {
-      setError('Failed to fetch posts');
-      }
-    };
-    fetchPosts();
-  }, [page]);
-
-  const totalPages = Math.ceil(total / POSTS_PER_PAGE);
-
-  return (
-    <>
-      <section className="sectionMain">
-        <h2>Posts</h2>
-        {error && <p className="error">{error}</p>}
-        <div className="cards">
-          {posts.map(post => <Post key={post.id} post={post} />)}
-        </div>
-        <div className="pagination">
-          <button onClick={() => setPage(p => Math.max(1, p - 1))} disabled={page === 1}>Prev</button>
-          <span className="pageInfo">Page {page} of {totalPages}</span>
-          <button onClick={() => setPage(p => Math.min(totalPages, p + 1))} disabled={page === totalPages}>Next</button>
-        </div>
-      </section>
-    </>
-  );
-} 

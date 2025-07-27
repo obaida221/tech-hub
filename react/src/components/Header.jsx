@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import logo from '../assets/tech hub logo-01.png';
+
 import '../App.css';
 
 export default function Header() {
@@ -17,7 +18,10 @@ export default function Header() {
         <Link to="/learn">What I learned</Link>
         <Link to="/posts">Posts</Link>
         <Link to="/experiments">Experiments</Link>
+        <Link to="/todo">Todo</Link>
+        <Link to="/users">Users</Link>
       </nav>
     </header>
+    
   );
 } 
