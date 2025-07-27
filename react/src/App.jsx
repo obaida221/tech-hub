@@ -35,8 +35,11 @@ function App() {
           <Route path="services" element={<Services />} />
           <Route path="contact" element={<Contact />} />
           <Route path="learn" element={<Learn />} />
-          <Route path="posts" element={<Posts />} />
-          <Route path="/posts/:id" element={<Posts />} />
+        
+          <Route path="posts" element={<Posts />}>
+            <Route path=":id" element={<Posts />} /> {/* Nested child route */}
+          </Route>
+
           <Route path="experiments" element={<Experiments />} />
           <Route path="todo" element={<Todo />} />
           <Route path="users" element={<Users />} />
@@ -45,5 +48,6 @@ function App() {
     </Router>
   );
 }
+
 
 export default App;
